@@ -555,15 +555,56 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text2);he
     </div>
     <div>
       <div class="card">
-        <div class="card-lbl">Трекер публикаций — какие хуки работают</div>
+        <div class="card-lbl">Трекер рилсов — план недели</div>
+        <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:8px">
+          <div style="text-align:center;font-size:8px;color:var(--text4);font-weight:700;padding-bottom:4px">ПН</div>
+          <div style="text-align:center;font-size:8px;color:var(--text4);font-weight:700;padding-bottom:4px">ВТ</div>
+          <div style="text-align:center;font-size:8px;color:var(--text4);font-weight:700;padding-bottom:4px">СР</div>
+          <div style="text-align:center;font-size:8px;color:var(--text4);font-weight:700;padding-bottom:4px">ЧТ</div>
+          <div style="text-align:center;font-size:8px;color:var(--text4);font-weight:700;padding-bottom:4px">ПТ</div>
+          <div style="text-align:center;font-size:8px;color:var(--text4);font-weight:700;padding-bottom:4px">СБ</div>
+          <div style="text-align:center;font-size:8px;color:var(--text4);font-weight:700;padding-bottom:4px">ВС</div>
+          <!-- Дни -->
+          <div style="background:#12102A;border:0.5px solid #2A2448;border-radius:8px;padding:6px 4px;text-align:center">
+            <div style="font-size:16px;margin-bottom:3px">✍️</div>
+            <div style="font-size:8px;color:var(--purple);font-weight:600">Сценарий</div>
+          </div>
+          <div style="background:#12102A;border:0.5px solid #2A2448;border-radius:8px;padding:6px 4px;text-align:center">
+            <div style="font-size:16px;margin-bottom:3px">🎨</div>
+            <div style="font-size:8px;color:var(--purple);font-weight:600">Раскадровка</div>
+          </div>
+          <div style="background:#0A1410;border:0.5px solid #0E2818;border-radius:8px;padding:6px 4px;text-align:center">
+            <div style="font-size:16px;margin-bottom:3px">🎬</div>
+            <div style="font-size:8px;color:var(--green);font-weight:600">Съёмка</div>
+          </div>
+          <div style="background:#0A1410;border:0.5px solid #0E2818;border-radius:8px;padding:6px 4px;text-align:center">
+            <div style="font-size:16px;margin-bottom:3px">🎬</div>
+            <div style="font-size:8px;color:var(--green);font-weight:600">Съёмка</div>
+          </div>
+          <div style="background:#14100A;border:0.5px solid #2A2010;border-radius:8px;padding:6px 4px;text-align:center">
+            <div style="font-size:16px;margin-bottom:3px">✂️</div>
+            <div style="font-size:8px;color:var(--gold);font-weight:600">Монтаж</div>
+          </div>
+          <div style="background:#14100A;border:0.5px solid #2A2010;border-radius:8px;padding:6px 4px;text-align:center">
+            <div style="font-size:16px;margin-bottom:3px">🚀</div>
+            <div style="font-size:8px;color:var(--gold);font-weight:600">Выкладка</div>
+          </div>
+          <div style="background:#09080E;border:0.5px solid var(--border);border-radius:8px;padding:6px 4px;text-align:center">
+            <div style="font-size:16px;margin-bottom:3px">😴</div>
+            <div style="font-size:8px;color:var(--text3);font-weight:600">Отдых</div>
+          </div>
+        </div>
+
+        <div class="sep"></div>
+        <div class="card-lbl" style="margin-bottom:8px">Опубликованные рилсы</div>
         <table class="rtable">
-          <thead><tr><th>Дата</th><th>Тема / хук</th><th>Подп.</th><th>Статус</th></tr></thead>
+          <thead><tr><th>Дата</th><th>Тема / хук</th><th>+Подп.</th><th>Статус</th></tr></thead>
           <tbody>
-            <tr><td style="color:var(--text3);white-space:nowrap">—</td><td><div style="font-size:11px;margin-bottom:3px">Region Beta Paradox</div><span class="hook-tag">вопрос-хук</span></td><td><span style="font-family:Syne,sans-serif;font-weight:700;color:var(--text4)">—</span></td><td><span class="pill pi-g">съёмка</span></td></tr>
-            <tr><td style="color:var(--text3)">—</td><td><div style="font-size:11px;margin-bottom:3px">Прокрастинация — не лень</div><span class="hook-tag">боль-хук</span></td><td><span style="font-family:Syne,sans-serif;font-weight:700;color:var(--text4)">—</span></td><td><span class="pill pi-p">скрипт</span></td></tr>
-            <tr><td style="color:var(--text3)">—</td><td><div style="font-size:11px;margin-bottom:3px">Личная история</div><span class="hook-tag">история-хук</span></td><td><span style="font-family:Syne,sans-serif;font-weight:700;color:var(--text4)">—</span></td><td><span class="pill pi-b">идея</span></td></tr>
+            <tr><td style="color:var(--text3);white-space:nowrap">июнь</td><td><div style="font-size:11px;margin-bottom:3px">Рилс 1 (опубликован)</div><span class="hook-tag">хук неизвестен</span></td><td><span style="font-family:Syne,sans-serif;font-weight:700;color:var(--gold)">—</span></td><td><span class="pill pi-t">готов</span></td></tr>
+            <tr style="opacity:.4"><td style="color:var(--text3)">—</td><td><div style="font-size:11px;color:var(--text4)">+ добавить после выкладки</div></td><td>—</td><td>—</td></tr>
           </tbody>
         </table>
+
         <div class="sep"></div>
         <div class="card-lbl" style="margin-bottom:8px">Аналитика хуков</div>
         <div class="row"><span class="rdot" style="background:var(--gold)"></span>Вопрос-хук<span class="pill pi-g" style="margin-left:auto">тест</span></div>
