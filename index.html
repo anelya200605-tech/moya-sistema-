@@ -603,9 +603,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text2);he
   <div class="pg-title">Здоровье</div>
   <div class="pg-sub">Сон · Питание · Тренировки · Июнь 2026</div>
   <div class="hbig">
-    <div class="hbs"><div class="hbs-icon">🌙</div><div class="hbs-val" style="color:var(--purple)">—</div><div class="hbs-lbl">сон ср.</div></div>
+    <div class="hbs"><div class="hbs-icon">🌙</div><div class="hbs-val" style="color:var(--purple)">9ч</div><div class="hbs-lbl">6 июня</div></div>
     <div class="hbs"><div class="hbs-icon">💪</div><div class="hbs-val" style="color:var(--green)">0</div><div class="hbs-lbl">тренировки</div></div>
-    <div class="hbs"><div class="hbs-icon">🔥</div><div class="hbs-val" style="color:var(--blue)">— ккал</div><div class="hbs-lbl">сегодня</div></div>
+    <div class="hbs"><div class="hbs-icon">🔥</div><div class="hbs-val" style="color:var(--blue)">984</div><div class="hbs-lbl">6 июня</div></div>
     <div class="hbs"><div class="hbs-icon">⚡</div><div class="hbs-val" style="color:var(--gold)">—</div><div class="hbs-lbl">стрик</div></div>
   </div>
   <div class="g21">
@@ -910,7 +910,7 @@ function closeEntry(){
 })();
 
 // HABITS
-var w1=[null,null,null,null,null,null,null],w2=[null,null,null,null,null,null,null];
+var w1=[null,null,null,null,null,0,null],w2=[null,null,null,null,null,null,null];
 var wn=[null,null,null,null,null,null,null];
 // 6 июня = суббота = позиция 6 в неделе 1
 var hab6jun = {son:0, tel:0, utro:1, eng:1, rils:0};
@@ -929,10 +929,15 @@ function makeHab(id,data){
     r.appendChild(c);
   });
 }
-makeHab('h1w1',w1);makeHab('h1w2',w2);makeHab('h1w3',w2);makeHab('h1w4',w2);
-makeHab('h2w1',wn);makeHab('h2w2',w2);makeHab('h2w3',w2);makeHab('h2w4',w2);
-makeHab('h3w1',w1);makeHab('h3w2',w2);makeHab('h3w3',w2);makeHab('h3w4',w2);
-makeHab('h4w1',wn);makeHab('h4w2',w2);makeHab('h4w3',w2);makeHab('h4w4',w2);
+var h1jun=[null,null,null,null,null,0,null]; // сон до 23: 6 июня - нет
+var h2jun=[null,null,null,null,null,1,null]; // без тел утром: 6 июня - да
+var h3jun=[null,null,null,null,null,1,null]; // английский: 6 июня - да
+var h4jun=[null,null,null,null,null,0,null]; // рилс: 6 июня - нет
+var h2btel=[null,null,null,null,null,0,null]; // без тел до сна: 6 июня - нет
+makeHab('h1w1',h1jun);makeHab('h1w2',w2);makeHab('h1w3',w2);makeHab('h1w4',w2);
+makeHab('h2w1',h2btel);makeHab('h2w2',w2);makeHab('h2w3',w2);makeHab('h2w4',w2);
+makeHab('h3w1',h3jun);makeHab('h3w2',w2);makeHab('h3w3',w2);makeHab('h3w4',w2);
+makeHab('h4w1',h4jun);makeHab('h4w2',w2);makeHab('h4w3',w2);makeHab('h4w4',w2);
 
 // TRAIN
 var td=[1,0,1,0,0,null,null];
