@@ -356,7 +356,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text2);he
 <!-- ══ ГЛАВНАЯ ══ -->
 <div class="page on" id="page-home">
   <div class="pg-title">Доброе утро, Анелия ✦</div>
-  <div class="pg-sub">Воскресенье, 7 июня 2026 · Чикаго, США</div>
+  <div class="pg-sub">Понедельник, 9 июня 2026 · Чикаго, США</div>
   <div class="g4">
     <div class="sc sc-g"><div class="sc-lbl">Рилсов в июне</div><div class="sc-val">1<span style="font-size:13px;opacity:.4">/8</span></div><div class="sc-sub">цель месяца</div><div class="mbar"><div class="mbf mb-g" style="width:12%"></div></div></div>
     <div class="sc sc-p"><div class="sc-lbl">Подписчики</div><div class="sc-val">92</div><div class="sc-sub">цель: 400 к июлю</div><div class="mbar"><div class="mbf mb-p" style="width:23%"></div></div></div>
@@ -367,9 +367,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text2);he
     <div>
       <div class="card">
         <div class="card-lbl">3 задачи на сегодня</div>
-        <div class="row"><span class="rdot" style="background:var(--gold)"></span>Написать сценарий рилса<span class="pill pi-g">перенесено с 6 июня</span></div>
-        <div class="row"><span class="rdot" style="background:var(--purple)"></span>Раскадровка<span class="pill pi-p">перенесено с 6 июня</span></div>
-        <div class="row"><span class="rdot" style="background:var(--blue)"></span>Биометрия — подготовить документы<span class="pill pi-b">важно</span></div>
+        <div class="row"><span class="rdot" style="background:var(--gold)"></span>Написать сценарий рилса<span class="pill pi-g">ПН — по плану</span></div>
+        <div class="row"><span class="rdot" style="background:var(--purple)"></span>Раскадровка<span class="pill pi-p">перенесено</span></div>
+        <div class="row"><span class="rdot" style="background:var(--green)"></span>Биометрия — документы ✓<span class="pill pi-t">выполнено</span></div>
       </div>
       <div class="card">
         <div class="card-lbl">Прогресс целей июня</div>
@@ -500,7 +500,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text2);he
     <div style="font-size:22px;flex-shrink:0">⚡</div>
     <div style="flex:1">
       <div class="ns-lbl">Следующий шаг — сделай прямо сейчас</div>
-      <div class="ns-text" id="nextStepText">Написать сценарий + раскадровку для рилса</div>
+      <div class="ns-text" id="nextStepText">Написать сценарий рилса — сегодня понедельник, день сценария</div>
       <div class="ns-edit" onclick="editNextStep()">✎ изменить</div>
     </div>
   </div>
@@ -926,7 +926,7 @@ document.querySelectorAll('.nav-item').forEach(function(item){
     action2: 'Раскадровка'
   }
 };
-  var today=7;
+  var today=9;
   var g=document.getElementById('calGrid');
   for(var d=1;d<=30;d++){
     var el=document.createElement('div');
