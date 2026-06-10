@@ -1278,7 +1278,11 @@ function togPay(el){
   };
 
   // Ключевые действия из Ежедневника (обновляются вечером)
-  var keyActions = window._keyActions || [];
+  // Ключевые действия из ежедневника вчера (обновляются каждый вечер)
+  var keyActions = window._keyActions || [
+    {text: '🎬 Съёмка рилса', done: false},
+    {text: '⏰ Проснуться в 7:00', done: false}
+  ];
 
   var list = document.getElementById('today-tasks-list');
   if(!list) return;
@@ -1293,6 +1297,18 @@ function togPay(el){
   var rt = reelTasks[d];
   if(rt) rt.forEach(function(t){
     html += '<div class="row"><span class="rdot" style="background:' + t.color + '"></span>' + t.text + '<span class="pill ' + t.pc + '">' + t.pill + '</span></div>';
+  });
+
+  // Привычки дня
+  var habits = [
+    {emoji: '🌙', text: 'Лечь до 23:00', color: 'var(--purple)'},
+    {emoji: '📵', text: 'Без телефона до сна', color: 'var(--purple)'},
+    {emoji: '☀️', text: 'Час без телефона утром', color: 'var(--gold)'},
+    {emoji: '🇬🇧', text: 'Английский', color: 'var(--blue)'},
+    {emoji: '🎬', text: 'Рилс', color: 'var(--green)'}
+  ];
+  habits.forEach(function(h){
+    html += '<div class="row"><span class="rdot" style="background:' + h.color + '"></span>' + h.emoji + ' ' + h.text + '<span class="pill pi-p">привычка</span></div>';
   });
 
   // Финансовое напоминание если просрочка
