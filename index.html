@@ -368,8 +368,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text2);he
       <div class="card">
         <div class="card-lbl">3 задачи на сегодня</div>
         <div class="row"><span class="rdot" style="background:var(--green)"></span>Сценарий рилса ✓<span class="pill pi-t">выполнено</span></div>
-        <div class="row"><span class="rdot" style="background:var(--gold)"></span>Раскадровка<span class="pill pi-g">ВТ — сегодня</span></div>
-        <div class="row"><span class="rdot" style="background:var(--green)"></span>Биометрия — документы ✓<span class="pill pi-t">выполнено</span></div>
+        <div class="row"><span class="rdot" style="background:var(--green)"></span>Раскадровка ✓<span class="pill pi-t">выполнено</span></div>
+        <div class="row"><span class="rdot" style="background:var(--red)"></span>⚠️ Оплатить тикет $100<span class="pill pi-r">срочно</span></div>
       </div>
       <div class="card">
         <div class="card-lbl">Прогресс целей июня</div>
@@ -500,7 +500,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text2);he
     <div style="font-size:22px;flex-shrink:0">⚡</div>
     <div style="flex:1">
       <div class="ns-lbl">Следующий шаг — сделай прямо сейчас</div>
-      <div class="ns-text" id="nextStepText">Сделать раскадровку рилса — сегодня вторник, день раскадровки</div>
+      <div class="ns-text" id="nextStepText">Завтра СР — день съёмки! Проснуться в 7:00 и сразу выйти на улицу</div>
       <div class="ns-edit" onclick="editNextStep()">✎ изменить</div>
     </div>
   </div>
@@ -786,7 +786,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text2);he
     <div class="sc sc-g"><div class="sc-lbl">Доходы</div><div class="sc-val" id="s-inc" style="font-size:17px">$6,796</div><div class="sc-sub" id="s-inc-sub">↓ vs апрель</div><div class="mbar"><div class="mbf mb-g" id="s-inc-bar" style="width:59%"></div></div></div>
     <div class="sc sc-r"><div class="sc-lbl">Расходы</div><div class="sc-val" id="s-exp" style="font-size:17px">$7,960</div><div class="sc-sub">карта + переводы</div><div class="mbar"><div class="mbf mb-r" style="width:100%"></div></div></div>
     <div class="sc sc-r" id="s-res-card"><div class="sc-lbl">Результат</div><div class="sc-val" id="s-res" style="font-size:15px">–$1,164</div><div class="sc-sub" id="s-res-sub">дефицит</div><div class="mbar"><div class="mbf mb-r" style="width:100%"></div></div></div>
-    <div class="sc sc-b"><div class="sc-lbl">Баланс счёта</div><div class="sc-val" style="font-size:17px">$398</div><div class="sc-sub">Chase сейчас</div><div class="mbar"><div class="mbf mb-b" style="width:3%"></div></div></div>
+    <div class="sc sc-b"><div class="sc-lbl">Баланс счёта</div><div class="sc-val" style="font-size:17px">$207</div><div class="sc-sub">Chase · 9 июня</div><div class="mbar"><div class="mbf mb-b" style="width:3%"></div></div></div>
   </div>
   <div class="g21">
     <div>
@@ -919,6 +919,12 @@ document.querySelectorAll('.nav-item').forEach(function(item){
 // CALENDAR
 (function(){
   var entries={
+  9: {
+    day: 'Проснулась в 10, заснула опять до обеда — забыла выпить кофе. Решила готовить завтраки на 3 дня вперёд по системе. К 14:00 поехала в Starbucks — написала сценарий и раскадровку. Завтра съёмки, очень хочу снять лучше прошлого рилса.',
+    insight: 'explore — исследовать. concerned — беспокоиться. as far as i am concerned — что касается меня.',
+    action1: 'Съёмка рилса',
+    action2: 'Проснуться в 7:00'
+  },
   6: {
     day: 'Продуктивный день — сделала много задач которые ели энергию. Из приоритетов ничего не сделала. Получила appointment на биометрию — теперь верю что смогу получить travel document.',
     insight: 'То что ты не меняешь — ты выбираешь.',
@@ -990,10 +996,16 @@ var h2jun=[null,null,null,null,null,1,null]; // без тел утром: 6 ию
 var h3jun=[null,null,null,null,null,1,null]; // английский: 6 июня - да
 var h4jun=[null,null,null,null,null,0,null]; // рилс: 6 июня - нет
 var h2btel=[null,null,null,null,null,0,null]; // без тел до сна: 6 июня - нет
-makeHab('h1w1',h1jun);makeHab('h1w2',w2);makeHab('h1w3',w2);makeHab('h1w4',w2);
-makeHab('h2w1',h2btel);makeHab('h2w2',w2);makeHab('h2w3',w2);makeHab('h2w4',w2);
-makeHab('h3w1',h3jun);makeHab('h3w2',w2);makeHab('h3w3',w2);makeHab('h3w4',w2);
-makeHab('h4w1',h4jun);makeHab('h4w2',w2);makeHab('h4w3',w2);makeHab('h4w4',w2);
+// 8-14 июня (неделя 2): ПН=0, ВТ=1
+var h1w2jun=[0,1,null,null,null,null,null]; // сон до 23: пн нет, вт да
+var h2w2jun=[0,0,null,null,null,null,null]; // без тел до сна: нет, нет
+var h3w2jun=[1,1,null,null,null,null,null]; // английский: да, да
+var h4w2jun=[0,1,null,null,null,null,null]; // рилс: нет, да
+var hutw2=[0,0,null,null,null,null,null]; // час без тел утром: нет, нет
+makeHab('h1w1',h1jun);makeHab('h1w2',h1w2jun);makeHab('h1w3',w2);makeHab('h1w4',w2);
+makeHab('h2w1',h2btel);makeHab('h2w2',hutw2);makeHab('h2w3',w2);makeHab('h2w4',w2);
+makeHab('h3w1',h3jun);makeHab('h3w2',h3w2jun);makeHab('h3w3',w2);makeHab('h3w4',w2);
+makeHab('h4w1',h4jun);makeHab('h4w2',h4w2jun);makeHab('h4w3',w2);makeHab('h4w4',w2);
 
 // TRAIN
 var td=[1,0,1,0,0,null,null];
@@ -1001,7 +1013,7 @@ makeHab('trainw1',td);makeHab('trainw2',w2);makeHab('trainw3',w2);makeHab('train
 
 // MOOD
 (function(){
-  var data=[0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+  var data=[0,0,0,0,0,2,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
   var emoji=['','😊','😐','😔'],cls=['','m-g','m-m','m-b'];
   var strip=document.getElementById('moodStrip');
   for(var i=0;i<30;i++){
