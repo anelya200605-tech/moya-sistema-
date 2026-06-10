@@ -355,8 +355,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text2);he
 
 <!-- ══ ГЛАВНАЯ ══ -->
 <div class="page on" id="page-home">
-  <div class="pg-title">Доброе утро, Анелия ✦</div>
-  <div class="pg-sub">Среда, 10 июня 2026 · Чикаго, США</div>
+  <div class="pg-title" id="greeting-title">Доброе утро, Анелия ✦</div>
+  <div class="pg-sub" id="greeting-date">Загрузка...</div>
   <div class="g4">
     <div class="sc sc-g"><div class="sc-lbl">Рилсов в июне</div><div class="sc-val">1<span style="font-size:13px;opacity:.4">/8</span></div><div class="sc-sub">цель месяца</div><div class="mbar"><div class="mbf mb-g" style="width:12%"></div></div></div>
     <div class="sc sc-p"><div class="sc-lbl">Подписчики</div><div class="sc-val">92</div><div class="sc-sub">цель: 400 к июлю</div><div class="mbar"><div class="mbf mb-p" style="width:23%"></div></div></div>
@@ -365,11 +365,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text2);he
   </div>
   <div class="g21">
     <div>
-      <div class="card">
-        <div class="card-lbl">3 задачи на сегодня</div>
-        <div class="row"><span class="rdot" style="background:var(--green)"></span>Сценарий рилса ✓<span class="pill pi-t">выполнено</span></div>
-        <div class="row"><span class="rdot" style="background:var(--green)"></span>Раскадровка ✓<span class="pill pi-t">выполнено</span></div>
-        <div class="row"><span class="rdot" style="background:var(--red)"></span>⚠️ Оплатить тикет $100<span class="pill pi-r">срочно</span></div>
+              <div class="card">
+        <div class="card-lbl" id="today-task-label">Задачи на сегодня</div>
+        <div id="today-tasks-list"></div>
       </div>
       <div class="card">
         <div class="card-lbl">Прогресс целей июня</div>
@@ -1253,6 +1251,60 @@ function togPay(el){
   var fcO=document.getElementById('fcOpt');
   nv.forEach(function(v){var b=document.createElement('div');b.className='fc-b fc-now';b.style.height=Math.max(2,v/max*100)+'%';fcN.appendChild(b)});
   ov.forEach(function(v){var b=document.createElement('div');b.className='fc-b fc-opt';b.style.height=Math.max(2,v/max*100)+'%';fcO.appendChild(b)});
+})();
+
+
+// AUTO DATE + TASKS
+(function(){
+  var days = ['воскресенье','понедельник','вторник','среда','четверг','пятница','суббота'];
+  var months = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+  var daysCap = ['Воскресенье','Понедельник','Вторник','Среда','Четверг','Пятница','Суббота'];
+  var now = new Date();
+  var d = now.getDay(); // 0=вс, 1=пн ... 6=сб
+  var dateStr = daysCap[d] + ', ' + now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear() + ' · Чикаго, США';
+  var greet = now.getHours() < 12 ? 'Доброе утро' : now.getHours() < 18 ? 'Добрый день' : 'Добрый вечер';
+  document.getElementById('greeting-title').textContent = greet + ', Анелия ✦';
+  document.getElementById('greeting-date').textContent = dateStr;
+
+  // Задачи по дню недели
+  var reelTasks = {
+    1: [{text:'✍️ Написать сценарий рилса', color:'var(--purple)', pill:'ПН · сценарий', pc:'pi-p'}],
+    2: [{text:'🎨 Раскадровка рилса', color:'var(--purple)', pill:'ВТ · раскадровка', pc:'pi-p'}],
+    3: [{text:'🎬 Съёмка рилса', color:'var(--gold)', pill:'СР · съёмка', pc:'pi-g'}],
+    4: [{text:'🎬 Съёмка рилса (2й день)', color:'var(--gold)', pill:'ЧТ · съёмка', pc:'pi-g'}],
+    5: [{text:'✂️ Монтаж рилса', color:'var(--blue)', pill:'ПТ · монтаж', pc:'pi-b'}],
+    6: [{text:'🚀 Выложить рилс', color:'var(--green)', pill:'СБ · выкладка', pc:'pi-t'}],
+    0: [{text:'😴 Отдых от рилсов', color:'var(--text3)', pill:'ВС · отдых', pc:'pi-p'}]
+  };
+
+  // Ключевые действия из Ежедневника (обновляются вечером)
+  var keyActions = window._keyActions || [];
+
+  var list = document.getElementById('today-tasks-list');
+  if(!list) return;
+  var html = '';
+
+  // Сначала ключевые действия если есть
+  keyActions.forEach(function(a){
+    html += '<div class="row"><span class="rdot" style="background:var(--gold)"></span>' + a.text + '<span class="pill ' + (a.done ? 'pi-t' : 'pi-g') + '">' + (a.done ? '✓ выполнено' : 'ключевое') + '</span></div>';
+  });
+
+  // Задача по дню недели рилсов
+  var rt = reelTasks[d];
+  if(rt) rt.forEach(function(t){
+    html += '<div class="row"><span class="rdot" style="background:' + t.color + '"></span>' + t.text + '<span class="pill ' + t.pc + '">' + t.pill + '</span></div>';
+  });
+
+  // Финансовое напоминание если просрочка
+  var today = now.getDate();
+  var month = now.getMonth() + 1;
+  if(today >= 4 && month === 6) {
+    html += '<div class="row"><span class="rdot" style="background:var(--red)"></span>⚠️ Car Toyota — просрочен<span class="pill pi-r">срочно</span></div>';
+  }
+
+  list.innerHTML = html || '<div class="row"><span class="rdot" style="background:var(--text3)"></span>Задачи не заданы — добавь вечером</div>';
+
+  document.getElementById('today-task-label').textContent = 'Задачи на ' + days[d];
 })();
 
 // DATE
