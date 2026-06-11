@@ -412,10 +412,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text2);he
   <div class="pg-title">Моя жизнь</div>
   <div class="pg-sub">Ежедневник · Привычки · Недели · Июнь 2026</div>
   <div class="an4">
-    <div class="sc sc-p"><div class="sc-lbl">Стрик</div><div class="sc-val">1</div><div class="sc-sub">день подряд</div><div class="mbar"><div class="mbf mb-p" style="width:3%"></div></div></div>
-    <div class="sc sc-g"><div class="sc-lbl">Привычки</div><div class="sc-val">50%</div><div class="sc-sub">5 из 10 за 2 дня</div><div class="mbar"><div class="mbf mb-g" style="width:50%"></div></div></div>
-    <div class="sc sc-t"><div class="sc-lbl">Записей</div><div class="sc-val">2</div><div class="sc-sub">6 и 9 июня</div><div class="mbar"><div class="mbf mb-t" style="width:7%"></div></div></div>
-    <div class="sc sc-b"><div class="sc-lbl">Настроение</div><div class="sc-val">😐</div><div class="sc-sub">Сб, 6 июня</div><div class="mbar"><div class="mbf mb-b" style="width:50%"></div></div></div>
+    <div class="sc sc-p"><div class="sc-lbl">Стрик</div><div class="sc-val">1</div><div class="sc-sub">английский 3 дня</div><div class="mbar"><div class="mbf mb-p" style="width:10%"></div></div></div>
+    <div class="sc sc-g"><div class="sc-lbl">Привычки</div><div class="sc-val">27%</div><div class="sc-sub">4 из 15 за 3 дня</div><div class="mbar"><div class="mbf mb-g" style="width:27%"></div></div></div>
+    <div class="sc sc-t"><div class="sc-lbl">Записей</div><div class="sc-val">3</div><div class="sc-sub">6, 9, 10 июня</div><div class="mbar"><div class="mbf mb-t" style="width:10%"></div></div></div>
+    <div class="sc sc-b"><div class="sc-lbl">Настроение</div><div class="sc-val">😔</div><div class="sc-sub">сегодня</div><div class="mbar"><div class="mbf mb-b" style="width:30%"></div></div></div>
   </div>
   <div class="g21">
     <div>
@@ -643,7 +643,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text2);he
   <div class="pg-sub">Сон · Питание · Тренировки · Июнь 2026</div>
   <div class="hbig">
     <div class="hbs"><div class="hbs-icon">🌙</div><div class="hbs-val" style="color:var(--purple)">9ч</div><div class="hbs-lbl">6 июня</div></div>
-    <div class="hbs"><div class="hbs-icon">💪</div><div class="hbs-val" style="color:var(--green)">1</div><div class="hbs-lbl">тренировки</div></div>
+    <div class="hbs"><div class="hbs-icon">💪</div><div class="hbs-val" style="color:var(--green)">2</div><div class="hbs-lbl">активность</div></div>
     <div class="hbs"><div class="hbs-icon">🔥</div><div class="hbs-val" style="color:var(--blue)">984</div><div class="hbs-lbl">6 июня</div></div>
     <div class="hbs"><div class="hbs-icon">⚡</div><div class="hbs-val" style="color:var(--gold)">1 день</div><div class="hbs-lbl">стрик</div></div>
   </div>
@@ -1179,11 +1179,11 @@ var h3jun=[null,null,null,null,null,1,null]; // английский: 6 июня
 var h4jun=[null,null,null,null,null,0,null]; // рилс: 6 июня - нет
 var h2btel=[null,null,null,null,null,0,null]; // без тел до сна: 6 июня - нет
 // 8-14 июня (неделя 2): ПН=0, ВТ=1
-var h1w2jun=[0,1,null,null,null,null,null]; // сон до 23: пн нет, вт да
-var h2w2jun=[0,0,null,null,null,null,null]; // без тел до сна: нет, нет
-var h3w2jun=[1,1,null,null,null,null,null]; // английский: да, да
-var h4w2jun=[0,1,null,null,null,null,null]; // рилс: нет, да
-var hutw2=[0,0,null,null,null,null,null]; // час без тел утром: нет, нет
+var h1w2jun=[0,0,0,null,null,null,null]; // сон до 23: пн нет, вт нет, ср нет
+var h2w2jun=[0,0,0,null,null,null,null]; // без тел до сна: нет, нет, нет
+var h3w2jun=[0,1,1,null,null,null,null]; // английский: пн нет, вт да, ср да
+var h4w2jun=[0,0,0,null,null,null,null]; // рилс: нет, нет, нет
+var hutw2=[0,0,0,null,null,null,null]; // час без тел утром: нет, нет, нет
 makeHab('h1w1',h1jun);makeHab('h1w2',h1w2jun);makeHab('h1w3',w2);makeHab('h1w4',w2);
 makeHab('h2w1',h2btel);makeHab('h2w2',hutw2);makeHab('h2w3',w2);makeHab('h2w4',w2);
 makeHab('h3w1',h3jun);makeHab('h3w2',h3w2jun);makeHab('h3w3',w2);makeHab('h3w4',w2);
@@ -1289,6 +1289,7 @@ function togPay(el){
     {text: '🎬 Съёмка рилса', done: false},
     {text: '⏰ Проснуться в 7:00', done: false}
   ];
+  // Обновлено: 10 июня 2026
 
   var list = document.getElementById('today-tasks-list');
   if(!list) return;
