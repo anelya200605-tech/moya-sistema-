@@ -1,0 +1,461 @@
+<title>Flex Repairs · Leads</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+:root{
+  --bg:#F2F2F7;--surface:#FFFFFF;--surface2:#F9F9FB;
+  --border:rgba(0,0,0,.09);--fg:#1C1C1E;--fg2:#6C6C70;--fg3:#AEAEB2;
+  --accent:#007AFF;--green:#34C759;--lgreen:#A8E6BA;--red:#FF3B30;
+  --google:#4285F4;--yelp:#D32323;
+  --radius:13px;--shadow:0 1px 4px rgba(0,0,0,.06),0 4px 20px rgba(0,0,0,.04);
+  color-scheme:light;
+}
+@media(prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#000;--surface:#1C1C1E;--surface2:#2C2C2E;
+    --border:rgba(255,255,255,.1);--fg:#F5F5F7;--fg2:#8E8E93;--fg3:#48484A;
+    --accent:#0A84FF;--green:#30D158;--lgreen:#30D15850;--red:#FF453A;
+    --google:#5B9BF8;--yelp:#FF6B6B;
+    --shadow:0 1px 4px rgba(0,0,0,.3),0 4px 20px rgba(0,0,0,.2);
+    color-scheme:dark;
+  }
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+  background:var(--bg);color:var(--fg);font-size:14px;line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  padding:16px max(16px,env(safe-area-inset-right,0px)) 40px max(16px,env(safe-area-inset-left,0px));
+}
+.hdr{display:flex;align-items:baseline;gap:10px;padding-bottom:16px}
+.hdr-title{font-size:20px;font-weight:700;letter-spacing:-.4px}
+.hdr-sub{font-size:13px;color:var(--fg2)}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:760px){.cols{grid-template-columns:1fr}}
+.panel{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+.phead{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:13px 16px 11px;border-bottom:.5px solid var(--border);
+}
+.ch-badge{display:flex;align-items:center;gap:9px}
+.ch-icon{
+  width:30px;height:30px;border-radius:8px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:700;
+}
+.icon-g{background:#EEF3FE;color:var(--google)}
+.icon-y{background:#FDF0F0;color:var(--yelp)}
+@media(prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .icon-g{background:#4285F41A}
+  :root:not([data-theme="light"]) .icon-y{background:#D323231A}
+}
+.ch-name{font-size:15px;font-weight:600}
+.ch-meta{font-size:11px;color:var(--fg2);margin-top:1px}
+.btn-add-ch{
+  background:transparent;border:.5px solid var(--border);border-radius:8px;
+  color:var(--accent);font-size:12px;font-weight:500;padding:5px 11px;
+  cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap;
+}
+.btn-add-ch:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+/* google budget block */
+.gbudget{
+  padding:10px 16px;background:var(--surface2);border-bottom:.5px solid var(--border);
+  display:flex;flex-direction:column;gap:7px;
+}
+.gbrow{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.gb-label{font-size:11px;color:var(--fg2);white-space:nowrap}
+.gb-input{
+  background:var(--surface);border:.5px solid var(--border);border-radius:7px;
+  font-size:13px;font-weight:500;font-family:inherit;color:var(--fg);
+  padding:4px 8px;width:90px;outline:none;
+}
+.gb-input:focus{border-color:var(--accent)}
+.gb-input-date{width:130px}
+.gb-status{
+  display:flex;align-items:center;gap:5px;
+  padding:5px 10px;border-radius:8px;font-size:12px;font-weight:500;
+  margin-top:2px;
+}
+.gb-ok{background:#EDFAF1;color:#1A7A3A}
+.gb-over{background:#FFF0EF;color:#C0392B}
+.gb-neutral{background:var(--surface2);color:var(--fg2);border:.5px solid var(--border)}
+@media(prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .gb-ok{background:#30D1581A;color:#30D158}
+  :root:not([data-theme="light"]) .gb-over{background:#FF453A1A;color:#FF453A}
+}
+
+/* yelp daily */
+.yday{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:9px 16px;background:var(--surface2);border-bottom:.5px solid var(--border);
+  font-size:12px;color:var(--fg2);gap:8px;
+}
+.yday b{color:var(--fg)}
+.day-ctrl{display:flex;align-items:center;gap:5px}
+.btn-d{
+  width:26px;height:26px;border-radius:6px;
+  background:var(--surface);border:.5px solid var(--border);
+  color:var(--fg2);font-size:14px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:all .1s;
+}
+.btn-d:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+.day-num{font-size:14px;font-weight:600;min-width:22px;text-align:center}
+
+/* table */
+.tbl{width:100%;border-collapse:collapse}
+.tbl th{
+  font-size:10px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;
+  color:var(--fg3);background:var(--surface2);
+  padding:7px 7px;text-align:right;border-bottom:.5px solid var(--border);white-space:nowrap;
+}
+.tbl th:first-child{text-align:left;padding-left:12px}
+.tbl td{padding:0;border-bottom:.5px solid var(--border);vertical-align:middle}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tbody tr:hover{background:var(--surface2)}
+.cell{
+  display:block;width:100%;padding:9px 7px;
+  font-size:12px;font-weight:500;text-align:right;
+  font-family:inherit;font-variant-numeric:tabular-nums;
+  background:transparent;border:none;outline:none;color:var(--fg);cursor:text;
+}
+.cell-num{text-align:left;padding-left:12px;font-weight:600;font-size:13px}
+.cell:focus{background:var(--accent);color:#fff}
+.cell-profit{pointer-events:none;font-weight:600;font-size:12px}
+.profit-p{color:var(--green)}
+.profit-n{color:var(--red)}
+.profit-z{color:var(--fg3)}
+
+/* status badge select */
+.status-wrap{padding:5px 7px}
+.status-sel{
+  appearance:none;-webkit-appearance:none;
+  border:none;outline:none;cursor:pointer;
+  font-family:inherit;font-size:11px;font-weight:500;
+  padding:3px 7px;border-radius:20px;
+  width:100%;text-align:center;
+}
+.s-green {background:#EDFAF1;color:#1A7A3A}
+.s-lgreen{background:#F0FAF4;color:#2E8B57}
+.s-red   {background:#FFF0EF;color:#C0392B}
+.s-gray  {background:var(--surface2);color:var(--fg2);border:.5px solid var(--border)}
+@media(prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .s-green {background:#30D1581A;color:#30D158}
+  :root:not([data-theme="light"]) .s-lgreen{background:#34C75920;color:#34C759}
+  :root:not([data-theme="light"]) .s-red   {background:#FF453A1A;color:#FF453A}
+  :root:not([data-theme="light"]) .s-gray  {background:var(--surface2);color:var(--fg2)}
+}
+
+.del-td{width:32px}
+.btn-del{
+  width:26px;height:26px;border-radius:6px;
+  background:none;border:none;color:var(--fg3);font-size:13px;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:all .1s;opacity:0;
+}
+tr:hover .btn-del{opacity:1}
+.btn-del:hover{background:var(--red);color:#fff}
+.empty{padding:26px 16px;text-align:center;color:var(--fg3);font-size:13px}
+
+/* footer profit */
+.pfoot{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:9px 16px;border-top:.5px solid var(--border);
+  background:var(--surface2);font-size:12px;color:var(--fg2);
+}
+.pfoot-val{font-size:14px;font-weight:700;font-variant-numeric:tabular-nums}
+
+/* stats block */
+.stats{
+  padding:10px 16px 12px;border-top:.5px solid var(--border);
+  background:var(--surface2);display:flex;flex-direction:column;gap:6px;
+}
+.stats-title{font-size:10px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--fg3);margin-bottom:2px}
+.srow{display:flex;justify-content:space-between;font-size:12px;color:var(--fg2);line-height:1.4}
+.srow b{color:var(--fg);font-weight:600}
+.srow-warn{color:var(--red)}
+.srow-good{color:var(--green)}
+</style>
+
+<div class="hdr">
+  <div class="hdr-title">Flex Repairs LLC</div>
+  <div class="hdr-sub">Отчёт по лидам</div>
+</div>
+
+<div class="cols">
+
+  <!-- ══ GOOGLE ADS ══ -->
+  <div class="panel">
+    <div class="phead">
+      <div class="ch-badge">
+        <div class="ch-icon icon-g">G</div>
+        <div>
+          <div class="ch-name">Google Ads</div>
+          <div class="ch-meta" id="gMeta">0 лидов</div>
+        </div>
+      </div>
+      <button class="btn-add-ch" onclick="addLead('google')">+ Лид</button>
+    </div>
+
+    <!-- Google budget tracker -->
+    <div class="gbudget">
+      <div class="gbrow">
+        <span class="gb-label">Нед. бюджет $</span>
+        <input class="gb-input" id="gBudgetW" type="number" value="980" oninput="renderGBudget()">
+        <span class="gb-label">Потрачено $</span>
+        <input class="gb-input" id="gSpent" type="number" placeholder="0" oninput="saveGMeta();renderGBudget()">
+        <span class="gb-label">С</span>
+        <input class="gb-input gb-input-date" id="gStartDate" type="date" oninput="saveGMeta();renderGBudget()">
+      </div>
+      <div id="gBudgetStatus"></div>
+    </div>
+
+    <table class="tbl">
+      <thead><tr>
+        <th>№</th><th>Реклама</th><th>Запчасти</th><th>Оплата</th><th>Прибыль</th><th>Статус</th><th></th>
+      </tr></thead>
+      <tbody id="gBody"></tbody>
+    </table>
+    <div class="empty" id="gEmpty">Нет лидов — нажми + Лид</div>
+    <div class="pfoot" id="gFoot" style="display:none">
+      <span>Итого прибыль</span>
+      <span class="pfoot-val" id="gTotal"></span>
+    </div>
+    <div class="stats" id="gStats" style="display:none"></div>
+  </div>
+
+  <!-- ══ YELP ADS ══ -->
+  <div class="panel">
+    <div class="phead">
+      <div class="ch-badge">
+        <div class="ch-icon icon-y">Y</div>
+        <div>
+          <div class="ch-name">Yelp Ads</div>
+          <div class="ch-meta">$10 / день</div>
+        </div>
+      </div>
+      <button class="btn-add-ch" onclick="addLead('yelp')">+ Лид</button>
+    </div>
+    <div class="yday">
+      <div>Дней: <b id="yDaysLbl">0</b> &nbsp;·&nbsp; Потрачено: <b id="ySpentLbl">$0</b></div>
+      <div class="day-ctrl">
+        <button class="btn-d" onclick="changeDays(-1)">−</button>
+        <span class="day-num" id="yDaysNum">0</span>
+        <button class="btn-d" onclick="changeDays(+1)">+</button>
+      </div>
+    </div>
+    <table class="tbl">
+      <thead><tr>
+        <th>№</th><th>Реклама</th><th>Запчасти</th><th>Оплата</th><th>Прибыль</th><th>Статус</th><th></th>
+      </tr></thead>
+      <tbody id="yBody"></tbody>
+    </table>
+    <div class="empty" id="yEmpty">Нет лидов — нажми + Лид</div>
+    <div class="pfoot" id="yFoot" style="display:none">
+      <span>Итого прибыль (−Yelp)</span>
+      <span class="pfoot-val" id="yTotal"></span>
+    </div>
+    <div class="stats" id="yStats" style="display:none"></div>
+  </div>
+
+</div>
+
+<script>
+const YELP_DAILY = 10;
+
+const STATUSES = [
+  {val:'',         label:'— статус —',               cls:'s-gray'},
+  {val:'dispatch', label:'Забукала диспетчер',         cls:'s-green'},
+  {val:'self',     label:'Забукался сам через сайт',   cls:'s-green'},
+  {val:'good',     label:'Good',                       cls:'s-lgreen'},
+  {val:'cancelled',label:'Was cancelled',              cls:'s-gray'},
+  {val:'notready', label:'Не была готова букать',      cls:'s-gray'},
+  {val:'noshare',  label:'Не зашарила',                cls:'s-red'},
+  {val:'wrongcat', label:'Не наша категория / не слышно', cls:'s-gray'},
+  {val:'noanswer', label:'Диспетчер не взял трубку',   cls:'s-red'},
+];
+const SMAP = Object.fromEntries(STATUSES.map(s=>[s.val,s]));
+
+function sCls(val){ return (SMAP[val]||SMAP['']).cls }
+function sLabel(val){ return (SMAP[val]||SMAP['']).label }
+
+let st = { google:[], yelp:[], ydays:0, gmeta:{budgetW:'980',spent:'',startDate:''} };
+let nid = 1;
+try{
+  const s=JSON.parse(localStorage.getItem('flx3')||'null');
+  if(s){ st=s; const ids=[...st.google,...st.yelp].map(l=>l.id).filter(Boolean); if(ids.length) nid=Math.max(...ids)+1; }
+}catch(e){}
+
+function save(){ try{localStorage.setItem('flx3',JSON.stringify(st))}catch(e){} }
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;') }
+
+function profit(l){ return (parseFloat(l.payment)||0)-(parseFloat(l.ads)||0)-(parseFloat(l.parts)||0) }
+function fmtP(n){ return (n<0?'–$':'$')+Math.abs(n).toLocaleString('en-US',{maximumFractionDigits:0}) }
+
+// ── GOOGLE BUDGET ─────────────────────────────────────────
+function saveGMeta(){
+  st.gmeta.budgetW = document.getElementById('gBudgetW').value;
+  st.gmeta.spent   = document.getElementById('gSpent').value;
+  st.gmeta.startDate = document.getElementById('gStartDate').value;
+  save();
+}
+
+function renderGBudget(){
+  saveGMeta();
+  const weekly = parseFloat(st.gmeta.budgetW)||980;
+  const spent  = parseFloat(st.gmeta.spent)||0;
+  const start  = st.gmeta.startDate;
+  const el     = document.getElementById('gBudgetStatus');
+  if(!start){ el.innerHTML=''; return; }
+  const days   = Math.max(0, Math.round((Date.now()-new Date(start))/(86400000)));
+  const expected = Math.round(days / 7 * weekly);
+  const diff   = spent - expected;
+  const pct    = expected ? Math.round(Math.abs(diff)/expected*100) : 0;
+  if(!days){ el.innerHTML=`<div class="gb-status gb-neutral">Начали сегодня · лимит $${expected}</div>`; return; }
+  if(diff<=0){
+    el.innerHTML=`<div class="gb-status gb-ok">✓ В лимите — можно потратить ещё $${Math.abs(diff)} (день ${days}, ожидалось $${expected})</div>`;
+  } else {
+    el.innerHTML=`<div class="gb-status gb-over">⚠ Перерасход $${diff} (${pct}%) — ожидалось $${expected} за ${days} дн.</div>`;
+  }
+}
+
+// ── YELP DAYS ─────────────────────────────────────────────
+function changeDays(d){ st.ydays=Math.max(0,(st.ydays||0)+d); save(); renderYDay(); refreshTotals('yelp'); }
+function renderYDay(){
+  const d=st.ydays||0, sp=d*YELP_DAILY;
+  document.getElementById('yDaysLbl').textContent=d;
+  document.getElementById('ySpentLbl').textContent='$'+sp;
+  document.getElementById('yDaysNum').textContent=d;
+}
+
+// ── LEADS ─────────────────────────────────────────────────
+function addLead(ch){
+  st[ch].push({id:nid++,num:'',ads:'',parts:'',payment:'',status:''});
+  save(); renderCh(ch);
+  setTimeout(()=>{
+    const rows=document.querySelectorAll(`#${ch==='google'?'g':'y'}Body tr`);
+    if(rows.length) rows[rows.length-1].querySelector('.cell-num').focus();
+  },40);
+}
+
+function delLead(ch,id){ st[ch]=st[ch].filter(l=>l.id!==id); save(); renderCh(ch); }
+
+function setField(ch,id,f,v){
+  const l=st[ch].find(l=>l.id===id); if(!l)return;
+  l[f]=v; save();
+  if(f!=='status') refreshProfit(id,l);
+  refreshTotals(ch);
+  renderStats(ch);
+}
+
+function setStatus(ch,id,v){
+  const l=st[ch].find(l=>l.id===id); if(!l)return;
+  l.status=v; save();
+  const sel=document.getElementById('ss'+id);
+  if(sel){ sel.className='status-sel '+sCls(v); }
+  refreshTotals(ch);
+  renderStats(ch);
+}
+
+function refreshProfit(id,l){
+  const el=document.getElementById('p'+id); if(!el)return;
+  const hasData=l.payment!==''||l.ads!==''||l.parts!=='';
+  if(!hasData){el.textContent='';el.className='cell cell-profit';return;}
+  const p=profit(l);
+  el.textContent=fmtP(p);
+  el.className='cell cell-profit '+(p>0?'profit-p':p<0?'profit-n':'profit-z');
+}
+
+function refreshTotals(ch){
+  const leads=st[ch];
+  const rawTotal=leads.reduce((s,l)=>s+profit(l),0);
+  const total=ch==='yelp'? rawTotal - (st.ydays||0)*YELP_DAILY : rawTotal;
+  const fEl=document.getElementById(ch==='google'?'gFoot':'yFoot');
+  const tEl=document.getElementById(ch==='google'?'gTotal':'yTotal');
+  const mEl=document.getElementById(ch==='google'?'gMeta':null);
+  if(leads.length){
+    fEl.style.display='';
+    tEl.textContent=fmtP(total);
+    tEl.style.color=total>=0?'var(--green)':'var(--red)';
+  } else { fEl.style.display='none' }
+  if(ch==='google'&&mEl) mEl.textContent=`${leads.length} лид${leads.length===1?'':'а/ов'}`;
+}
+
+function renderStats(ch){
+  const leads=st[ch];
+  const sEl=document.getElementById(ch==='google'?'gStats':'yStats');
+  if(!leads.length){ sEl.style.display='none'; return; }
+  sEl.style.display='';
+
+  const total=leads.length;
+  const booked=leads.filter(l=>l.status==='dispatch'||l.status==='self').length;
+  const good  =leads.filter(l=>l.status==='good').length;
+  const lost  =leads.filter(l=>l.status==='noshare'||l.status==='noanswer').length;
+  const pctBooked=total?Math.round(booked/total*100):0;
+  const pctBG    =total?Math.round((booked+good)/total*100):0;
+
+  // per-status counts (non-empty)
+  const counts={};
+  leads.forEach(l=>{ if(l.status) counts[l.status]=(counts[l.status]||0)+1; });
+  const statusRows=Object.entries(counts).map(([v,n])=>`<div class="srow"><span>${sLabel(v)}</span><b>${n}</b></div>`).join('');
+
+  sEl.innerHTML=`
+    <div class="stats-title">Итоги</div>
+    ${statusRows}
+    <div class="srow srow-good"><span>% забуканных</span><b>${pctBooked}% (${booked}/${total})</b></div>
+    <div class="srow srow-good"><span>% забукан + Good</span><b>${pctBG}% (${booked+good}/${total})</b></div>
+    ${lost>0?`<div class="srow srow-warn"><span>Потеряно (диспетчер)</span><b>${lost}</b></div>`:''}
+  `;
+}
+
+function renderCh(ch){
+  const leads=st[ch];
+  const prefix=ch==='google'?'g':'y';
+  const body=document.getElementById(prefix+'Body');
+  const empty=document.getElementById(prefix+'Empty');
+  body.innerHTML='';
+  empty.style.display=leads.length?'none':'';
+  leads.forEach(l=>{
+    const p=profit(l);
+    const hasData=l.payment!==''||l.ads!==''||l.parts!=='';
+    const pCls=hasData?(p>0?'profit-p':p<0?'profit-n':'profit-z'):'';
+    const pTxt=hasData?fmtP(p):'';
+    const sCl=sCls(l.status||'');
+    const opts=STATUSES.map(s=>`<option value="${s.val}"${l.status===s.val?' selected':''}>${s.label}</option>`).join('');
+    const tr=document.createElement('tr');
+    tr.innerHTML=`
+      <td><input class="cell cell-num" value="${esc(l.num)}" placeholder="№101" data-ch="${ch}" data-id="${l.id}" data-f="num"></td>
+      <td><input class="cell" type="number" value="${esc(l.ads)}" placeholder="0" data-ch="${ch}" data-id="${l.id}" data-f="ads"></td>
+      <td><input class="cell" type="number" value="${esc(l.parts)}" placeholder="0" data-ch="${ch}" data-id="${l.id}" data-f="parts"></td>
+      <td><input class="cell" type="number" value="${esc(l.payment)}" placeholder="0" data-ch="${ch}" data-id="${l.id}" data-f="payment"></td>
+      <td><span id="p${l.id}" class="cell cell-profit ${pCls}">${pTxt}</span></td>
+      <td class="status-wrap"><select id="ss${l.id}" class="status-sel ${sCl}" onchange="setStatus('${ch}',${l.id},this.value)">${opts}</select></td>
+      <td class="del-td"><button class="btn-del" onclick="delLead('${ch}',${l.id})">✕</button></td>`;
+    body.appendChild(tr);
+  });
+  body.querySelectorAll('input.cell').forEach(inp=>{
+    inp.addEventListener('input',()=>setField(inp.dataset.ch,+inp.dataset.id,inp.dataset.f,inp.value));
+    inp.addEventListener('keydown',e=>{
+      if(e.key==='Enter'||e.key==='Tab'){
+        e.preventDefault();
+        const all=[...document.querySelectorAll('input.cell')];
+        const i=all.indexOf(inp);
+        const nx=all[i+(e.shiftKey?-1:1)];
+        if(nx)nx.focus();else inp.blur();
+      }
+    });
+  });
+  refreshTotals(ch);
+  renderStats(ch);
+}
+
+function render(){
+  // restore gmeta inputs
+  const gm=st.gmeta||{};
+  if(gm.budgetW) document.getElementById('gBudgetW').value=gm.budgetW;
+  if(gm.spent)   document.getElementById('gSpent').value=gm.spent;
+  if(gm.startDate) document.getElementById('gStartDate').value=gm.startDate;
+  renderCh('google'); renderCh('yelp');
+  renderYDay(); renderGBudget();
+}
+render();
+</script>
